@@ -1,0 +1,543 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Button from '@/components/Button.astro';
+import Counter from '@/components/Counter.astro';
+import Reveal from '@/components/Reveal.astro';
+import Icon from '@/components/Icon.astro';
+import CaseStudyCard from '@/components/CaseStudyCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { site } from '@/lib/site';
+import { stats } from '@/lib/stats';
+
+const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const featured = all.filter((e) => e.data.featured).slice(0, 3);
+
+const layers = [
+  {
+    icon: 'smartphone',
+    title: 'Frontend',
+    text: 'SwiftUI for iOS and a native Android build, designed for the device it runs on.',
+  },
+  {
+    icon: 'server',
+    title: 'Backend and deployment',
+    text: 'Auth, data, APIs, and hosting set up, monitored, and documented so you own it.',
+  },
+  {
+    icon: 'credit-card',
+    title: 'Payments',
+    text: 'Stripe, Apple Pay, subscriptions, and in-app purchases wired in and tested.',
+  },
+  {
+    icon: 'rocket',
+    title: 'App store launch',
+    text: 'Store listings, review, release, and 30 days of post-launch support included.',
+  },
+] as const;
+
+const steps = [
+  { n: '01', title: 'Discovery call', text: '20 minutes on what you need and who it is for.' },
+  { n: '02', title: 'Scope in 48 hours', text: 'A written scope, fixed price, and delivery date.' },
+  { n: '03', title: 'Weekly demo builds', text: 'A TestFlight build on your phone every week.' },
+  {
+    n: '04',
+    title: 'Launch and support',
+    text: 'Store submission handled, 30 days of support included.',
+  },
+];
+
+const builtFor = [
+  'Clinics and practices',
+  'Local businesses',
+  'Startups',
+  'Cleared and defense teams',
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'LocalBusiness',
+      '@id': `${site.url}/#business`,
+      name: site.legalName,
+      url: site.url,
+      email: site.email,
+      description: site.description,
+      image: `${site.url}/og-default.png`,
+      logo: `${site.url}/apple-touch-icon.png`,
+      areaServed: 'US',
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: 'DC',
+        addressCountry: 'US',
+      },
+      founder: { '@id': `${site.url}/#founder` },
+      sameAs: [site.linkedin, site.github],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#founder`,
+      name: site.founder,
+      jobTitle: 'Founder and Engineer',
+      worksFor: { '@id': `${site.url}/#business` },
+      url: `${site.url}/about`,
+      sameAs: [site.linkedin, site.github],
+    },
+  ],
+};
+---
+
+<Base title="Swiftly Built — Fast. Complete. Built to last." description={site.description}>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <!-- Hero -->
+  <Section tone="dark" aria-labelledby="hero-h">
+    <div class="hero">
+      <div class="hero__copy">
+        <Eyebrow>iOS · Android · Backend · Payments</Eyebrow>
+        <h1 id="hero-h" class="h-hero hero__h">
+          <span>Fast.</span>
+          <span>Complete.</span>
+          <span>Built to last.</span>
+        </h1>
+        <p class="hero__sub">
+          Production-ready iOS and Android apps, delivered end to end by one engineer. Weeks, not
+          quarters.
+        </p>
+        <div class="hero__actions">
+          <Button href="/contact" variant="primary">
+            Book a 20-minute call
+          </Button>
+          <Button href="/work" variant="outline">
+            See the work
+          </Button>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="phone" id="hero-phone" aria-label="Featured work previews" role="group">
+          {featured.map((e, i) => (
+            <Image
+              src={e.data.cover}
+              alt={`${e.data.title} preview`}
+              width={600}
+              height={1240}
+              format="avif"
+              quality={60}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : 'auto'}
+              class:list={['phone__img', { 'is-active': i === 0 }]}
+              data-slide={i}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Proof strip -->
+  <section class="proof" aria-label="Track record">
+    <div class="container-site proof__grid">
+      <Counter value={stats.appsShipped} label="apps shipped to the App Store" />
+      <Counter
+        value={stats.avgTurnaroundWeeks}
+        suffix="wks"
+        label="average turnaround, scope to store"
+      />
+      <Counter
+        value={stats.defenseYears}
+        suffix="yrs"
+        label="defense technology and program management"
+      />
+      <Counter value={stats.clearance} label="active clearance" static />
+    </div>
+  </section>
+
+  <!-- What you get -->
+  <Section tone="dark" aria-labelledby="get-h">
+    <Eyebrow>What you get</Eyebrow>
+    <h2 id="get-h" class="h-display section-h">
+      One builder. Every layer. Zero hand-offs.
+    </h2>
+    <ul class="layers" role="list">
+      {layers.map((l, i) => (
+        <Reveal as="li" index={i} class="layer">
+          <Icon name={l.icon} />
+          <h3>{l.title}</h3>
+          <p>{l.text}</p>
+        </Reveal>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- Featured work -->
+  <Section tone="light" aria-labelledby="work-h">
+    <div class="split-head">
+      <div>
+        <Eyebrow onLight>Featured work</Eyebrow>
+        <h2 id="work-h" class="h-display section-h">
+          Shipped, not promised.
+        </h2>
+      </div>
+      <a href="/work" class="text-link">
+        All case studies →
+      </a>
+    </div>
+    <ul class="cards" role="list">
+      {featured.map((e, i) => (
+        <Reveal as="li" index={i}>
+          <CaseStudyCard entry={e} />
+        </Reveal>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- How it works -->
+  <Section tone="dark" aria-labelledby="how-h">
+    <Eyebrow>How it works</Eyebrow>
+    <h2 id="how-h" class="h-display section-h">
+      Four steps. One lane.
+    </h2>
+    <ol class="steps" role="list">
+      {steps.map((s, i) => (
+        <Reveal as="li" index={i} class="step">
+          <span class="step__n" aria-hidden="true">
+            {s.n}
+          </span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </Reveal>
+      ))}
+    </ol>
+  </Section>
+
+  <!-- Built for -->
+  <section class="built" aria-label="Who we build for">
+    <div class="container-site built__row">
+      <span class="built__label">Built for</span>
+      <ul role="list" class="built__list">
+        {builtFor.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- About teaser -->
+  <Section tone="dark" aria-labelledby="about-h">
+    <div class="about">
+      <div class="about__photo" role="img" aria-label="Founder photo placeholder">
+        <span>[FOUNDER PHOTO]</span>
+      </div>
+      <div>
+        <Eyebrow>About the founder</Eyebrow>
+        <h2 id="about-h" class="h-display section-h">
+          Built by someone who knows what fast actually means.
+        </h2>
+        <p class="about__p">
+          JJ Trimble ran track for Team USA, then spent eight years as an Air Force and Space Force
+          officer leading technical programs. Swiftly Built is the engineer he wanted to hire and
+          could not find.
+        </p>
+        <a href="/about" class="text-link">
+          Read the story →
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .section-h {
+    margin: 0 0 40px;
+    max-width: 22ch;
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero__h {
+    margin: 0 0 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero__sub {
+    font-size: clamp(18px, 2vw, 21px);
+    color: var(--color-text-soft);
+    max-width: 44ch;
+    margin: 0 0 36px;
+  }
+  .hero__actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .hero__visual {
+    display: flex;
+    justify-content: center;
+  }
+  .phone {
+    position: relative;
+    width: 300px;
+    height: 620px;
+    border-radius: 44px;
+    border: 1px solid var(--color-graphite);
+    background: var(--color-ink);
+    overflow: hidden;
+    box-shadow: 0 0 0 6px var(--color-jet);
+  }
+  .phone__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 600ms var(--ease-out);
+  }
+  .phone__img.is-active {
+    opacity: 1;
+  }
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .hero__visual {
+      order: 2;
+    }
+    .phone {
+      width: 260px;
+      height: 540px;
+      border-radius: 40px;
+    }
+  }
+
+  /* Proof */
+  .proof {
+    background: var(--color-ink);
+    border-top: 1px solid var(--color-graphite);
+    border-bottom: 1px solid var(--color-graphite);
+  }
+  .proof__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding-block: 24px;
+  }
+  @media (max-width: 767.98px) {
+    .proof__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Layers */
+  .layers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .layer {
+    background: var(--color-ink);
+    border: 1px solid var(--color-graphite);
+    border-radius: var(--radius-md);
+    padding: 28px;
+  }
+  .layer h3 {
+    font-size: 20px;
+    margin: 20px 0 10px;
+  }
+  .layer p {
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 15.5px;
+  }
+  @media (max-width: 1000px) {
+    .layers {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .layers {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Featured */
+  .split-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .split-head .section-h {
+    margin-bottom: 0;
+  }
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    border-top: 2px solid var(--color-electric);
+  }
+  .step {
+    padding-top: 24px;
+  }
+  .step__n {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-electric);
+    letter-spacing: 0.1em;
+  }
+  .step h3 {
+    font-size: 20px;
+    margin: 14px 0 8px;
+  }
+  .step p {
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 15.5px;
+  }
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Built for */
+  .built {
+    background: var(--color-ink);
+    border-top: 1px solid var(--color-graphite);
+    border-bottom: 1px solid var(--color-graphite);
+  }
+  .built__row {
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding-block: 28px;
+  }
+  .built__label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+  }
+  .built__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+  .built__list li + li::before {
+    content: '·';
+    color: var(--color-electric);
+    margin-right: 28px;
+  }
+
+  /* About */
+  .about {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .about__photo {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 380 / 440;
+    border-radius: var(--radius-lg);
+    background: var(--color-ink);
+    border: 1px solid var(--color-graphite);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    font-size: 14px;
+  }
+  .about__p {
+    color: var(--color-text-soft);
+    font-size: 18px;
+    max-width: 52ch;
+    margin: 0 0 24px;
+  }
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>
+
+<script>
+  // Hero phone crossfade: every 4s, pauses on hover and under reduced motion.
+  const phone = document.getElementById('hero-phone');
+  const slides = phone ? Array.from(phone.querySelectorAll<HTMLImageElement>('[data-slide]')) : [];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (phone && slides.length > 1 && !reduce) {
+    let i = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const next = () => {
+      slides[i].classList.remove('is-active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-active');
+    };
+    const start = () => {
+      if (!timer) timer = setInterval(next, 4000);
+    };
+    const stop = () => {
+      if (timer) clearInterval(timer);
+      timer = null;
+    };
+    phone.addEventListener('mouseenter', stop);
+    phone.addEventListener('mouseleave', start);
+    phone.addEventListener('focusin', stop);
+    phone.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    start();
+  }
+</script>
