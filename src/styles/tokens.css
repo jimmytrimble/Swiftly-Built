@@ -1,0 +1,26 @@
+:root {
+  --color-jet: #0b0b0d; /* primary background */
+  --color-graphite: #2a2a2e; /* cards, borders on dark */
+  --color-ink: #141416; /* raised surfaces on dark */
+  --color-white: #ffffff;
+  --color-fog: #f2f2f5; /* light section background */
+  --color-mist: #e4e4e7; /* borders on light */
+  --color-electric: #0a84ff; /* accent: buttons, links, logo mark */
+  --color-track: #0047ab; /* accent hover / on light backgrounds */
+  --color-text-muted: #a1a1aa; /* captions on dark (7:1 on jet) */
+  --color-text-soft: #d4d4d8; /* body on dark */
+  --color-text-muted-light: #52525b; /* captions on light */
+
+  --font-display: 'Inter Tight Variable', 'Inter Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Inter Fallback', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 16px;
+  --max-w: 1200px;
+  --section-y: clamp(72px, 10vw, 112px);
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
