@@ -1,0 +1,27 @@
+---
+interface Props {
+  onLight?: boolean;
+  class?: string;
+  as?: 'p' | 'span' | 'div';
+}
+const { onLight = false, class: className = '', as: Tag = 'p' } = Astro.props;
+---
+
+<Tag class:list={['eyebrow', { 'eyebrow--light': onLight }, className]}>
+  <slot />
+</Tag>
+
+<style>
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-electric);
+    margin: 0 0 16px;
+  }
+  .eyebrow--light {
+    color: var(--color-track);
+  }
+</style>

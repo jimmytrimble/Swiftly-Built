@@ -1,0 +1,77 @@
+---
+/** Stat that counts up once when scrolled into view. Skipped under reduced motion. */
+interface Props {
+  value: string | number;
+  suffix?: string;
+  label: string;
+  static?: boolean;
+}
+const { value, suffix = '', label, static: isStatic = false } = Astro.props;
+const numeric = typeof value === 'number';
+---
+
+<div class="counter">
+  <p class="counter__value">
+    <span class="counter__num" data-counter={numeric && !isStatic ? value : undefined}>
+      {value}
+    </span>
+    {suffix && <span class="counter__suffix">{suffix}</span>}
+  </p>
+  <p class="counter__label">{label}</p>
+</div>
+
+<style>
+  .counter {
+    padding: 24px 0;
+  }
+  .counter__value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(36px, 4vw, 52px);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin: 0 0 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .counter__suffix {
+    font-size: 0.5em;
+    margin-left: 6px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+  }
+  .counter__label {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.4;
+  }
+</style>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nodes = document.querySelectorAll<HTMLElement>('[data-counter]');
+  if (!reduce && nodes.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          io.unobserve(el);
+          const target = Number(el.dataset.counter);
+          const start = performance.now();
+          const dur = 900;
+          const tick = (t: number) => {
+            const p = Math.min(1, (t - start) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = String(Math.round(target * eased));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          el.textContent = '0';
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.4 },
+    );
+    nodes.forEach((n) => io.observe(n));
+  }
+</script>

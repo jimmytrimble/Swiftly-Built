@@ -1,0 +1,53 @@
+---
+interface Props {
+  tone?: 'dark' | 'raised' | 'light' | 'accent';
+  id?: string;
+  class?: string;
+  padded?: boolean;
+  'aria-labelledby'?: string;
+}
+const {
+  tone = 'dark',
+  id,
+  class: className = '',
+  padded = true,
+  'aria-labelledby': labelledby,
+} = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledby}
+  class:list={[
+    'section',
+    `section--${tone}`,
+    { 'section--padded': padded, 'on-light': tone === 'light' },
+    className,
+  ]}
+>
+  <div class="container-site">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section--padded {
+    padding-block: var(--section-y);
+  }
+  .section--dark {
+    background: var(--color-jet);
+    color: var(--color-white);
+  }
+  .section--raised {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+  .section--light {
+    background: var(--color-fog);
+    color: var(--color-jet);
+  }
+  .section--accent {
+    background: var(--color-electric);
+    color: var(--color-white);
+  }
+</style>

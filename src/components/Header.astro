@@ -1,0 +1,226 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+const links = [
+  { href: '/work', label: 'Work' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+
+<header class="header">
+  <div class="container-site header__inner">
+    <a href="/" class="header__brand" aria-label="Swiftly Built, home">
+      <Logo variant="horizontal" size={30} />
+    </a>
+
+    <nav class="header__nav" aria-label="Primary">
+      <ul class="header__links">
+        {links.map((l) => (
+          <li>
+            <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Button href="/contact" variant="primary" class="header__cta">
+        Book a call
+      </Button>
+    </nav>
+
+    <button
+      class="header__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+      id="menu-toggle"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path class="icon-open" d="M4 7h16M4 12h16M4 17h16"></path>
+        <path class="icon-close" d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="header__menu" id="mobile-menu" hidden>
+    <nav class="container-site" aria-label="Mobile">
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))}
+        <li class="header__menu-cta">
+          <Button href="/contact" variant="primary" class="w-full">
+            Book a call
+          </Button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-jet);
+    border-bottom: 1px solid var(--color-graphite);
+  }
+  .header__inner {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .header__brand {
+    display: inline-flex;
+    text-decoration: none;
+    color: inherit;
+  }
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .header__links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .header__links a {
+    color: var(--color-text-soft);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color var(--motion-fast) var(--ease-out);
+  }
+  .header__links a:hover,
+  .header__links a[aria-current='page'] {
+    color: var(--color-white);
+  }
+  .header__toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--color-graphite);
+    border-radius: var(--radius-sm);
+    color: var(--color-white);
+    cursor: pointer;
+  }
+  .icon-close {
+    display: none;
+  }
+  .header__toggle[aria-expanded='true'] .icon-open {
+    display: none;
+  }
+  .header__toggle[aria-expanded='true'] .icon-close {
+    display: block;
+  }
+  .header__menu {
+    border-top: 1px solid var(--color-graphite);
+    background: var(--color-jet);
+  }
+  .header__menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 12px 0 20px;
+  }
+  .header__menu li a:not(.btn) {
+    display: block;
+    padding: 14px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-white);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-graphite);
+  }
+  .header__menu-cta {
+    padding-top: 16px;
+  }
+  @media (max-width: 767.98px) {
+    .header__nav {
+      display: none;
+    }
+    .header__toggle {
+      display: inline-flex;
+    }
+  }
+  @media (min-width: 768px) {
+    .header__menu {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    const focusable = () =>
+      Array.from(
+        menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+      ) as HTMLElement[];
+
+    const open = () => {
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+      document.addEventListener('keydown', onKey);
+      focusable()[0]?.focus();
+    };
+    const close = (refocus = true) => {
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+      document.removeEventListener('keydown', onKey);
+      if (refocus) toggle.focus();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      // Trap focus: toggle button + menu items form the cycle.
+      const items = [toggle, ...focusable()];
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    toggle.addEventListener('click', () => (menu.hidden ? open() : close()));
+    window.matchMedia('(min-width: 768px)').addEventListener('change', (m) => {
+      if (m.matches && !menu.hidden) close(false);
+    });
+  }
+</script>

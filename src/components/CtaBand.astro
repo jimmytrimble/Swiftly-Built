@@ -1,0 +1,38 @@
+---
+import Section from './Section.astro';
+import Button from './Button.astro';
+interface Props {
+  heading?: string;
+  cta?: string;
+}
+const {
+  heading = "Have an app in mind? Let's scope it this week.",
+  cta = 'Book a 20-minute call',
+} = Astro.props;
+---
+
+<Section tone="accent" aria-labelledby="cta-heading">
+  <div class="cta">
+    <h2 id="cta-heading" class="cta__h">
+      {heading}
+    </h2>
+    <Button href="/contact" variant="dark">
+      {cta}
+    </Button>
+  </div>
+</Section>
+
+<style>
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cta__h {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 44px);
+    max-width: 18ch;
+  }
+</style>
