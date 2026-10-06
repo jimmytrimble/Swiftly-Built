@@ -1,0 +1,203 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import CtaBand from '@/components/CtaBand.astro';
+
+const timeline = [
+  { when: '[YEARS]', what: 'Team USA track athlete' },
+  { when: '2018 to 2026', what: 'U.S. Air Force / Space Force officer' },
+  { when: '3 years', what: 'Software developer, TS-level projects' },
+  { when: 'Founded 2026', what: 'Swiftly Built LLC' },
+];
+const credentials = [
+  'Former Team USA track athlete',
+  'U.S. Space Force officer',
+  'Active TS/SCI clearance',
+  'M.S. Cybersecurity',
+  'Apps in production on the App Store',
+];
+---
+
+<Base
+  title="About JJ Trimble — Swiftly Built"
+  description="JJ Trimble: former Team USA track athlete, eight years as an Air Force and Space Force officer, and the one engineer behind Swiftly Built."
+>
+  <Section tone="dark" aria-labelledby="about-h">
+    <div class="about">
+      <div class="about__photo" role="img" aria-label="Founder photo placeholder">
+        <span>[FOUNDER PHOTO]</span>
+      </div>
+      <div class="about__copy">
+        <h1 id="about-h" class="h-display">
+          Built by someone who knows what fast actually means.
+        </h1>
+        <p>
+          I'm JJ Trimble, founder of Swiftly Built. Before I wrote code, I ran track for Team USA.
+          Sprinting teaches you one thing above everything else: speed is not rushing. It is
+          preparation, precision, and a clean start.
+        </p>
+        <p>
+          I carried that into eight years as an Air Force and Space Force officer, where I managed
+          technical programs, helped stand up a new organization, and led prototype development on
+          projects that could not afford to fail. Along the way I became a software developer,
+          spending three years building applications, some of them at the TS level, and shipping
+          apps of my own from first sketch to the App Store.
+        </p>
+        <p>
+          Swiftly Built is the company I wanted to hire and could not find: one engineer who handles
+          the whole thing. The screens, the server, the deployment, the payments, the store
+          submission. No hand-offs, no waiting on a third party, no surprises in the invoice.
+        </p>
+        <p>
+          The name is a double meaning. My apps are written in Swift. They are also delivered
+          swiftly. And they are built to last, because I have spent my career on systems where "it
+          works for now" was never good enough.
+        </p>
+        <p>If you have an app in mind, let's scope it this week.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="raised" aria-labelledby="tl-h">
+    <h2 id="tl-h" class="tl-h">
+      The path here
+    </h2>
+    <ol class="timeline" role="list">
+      {timeline.map((t) => (
+        <li class="timeline__item">
+          <span class="timeline__dot" aria-hidden="true" />
+          <span class="timeline__when">{t.when}</span>
+          <span class="timeline__what">{t.what}</span>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <section class="creds" aria-label="Credentials">
+    <div class="container-site">
+      <ul class="creds__list" role="list">
+        {credentials.map((c) => (
+          <li>{c}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about__photo {
+    position: sticky;
+    top: 104px;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 380 / 440;
+    border-radius: var(--radius-lg);
+    background: var(--color-ink);
+    border: 1px solid var(--color-graphite);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    font-size: 14px;
+  }
+  .about__copy h1 {
+    margin: 0 0 32px;
+  }
+  .about__copy p {
+    font-size: 18px;
+    color: var(--color-text-soft);
+    max-width: 60ch;
+    margin: 0 0 20px;
+  }
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .about__photo {
+      position: static;
+    }
+  }
+
+  .tl-h {
+    font-size: 28px;
+    margin: 0 0 32px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 28px;
+    position: relative;
+    display: grid;
+    gap: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--color-electric);
+  }
+  .timeline__item {
+    position: relative;
+    display: grid;
+    gap: 4px;
+  }
+  .timeline__dot {
+    position: absolute;
+    left: -28px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-graphite);
+    border: 2px solid var(--color-jet);
+    box-shadow: 0 0 0 2px var(--color-electric);
+  }
+  .timeline__when {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+  }
+  .timeline__what {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .creds {
+    background: var(--color-jet);
+    border-top: 1px solid var(--color-graphite);
+    border-bottom: 1px solid var(--color-graphite);
+  }
+  .creds__list {
+    list-style: none;
+    margin: 0;
+    padding: 24px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 0;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-text-soft);
+  }
+  .creds__list li + li::before {
+    content: '·';
+    color: var(--color-electric);
+    margin: 0 14px;
+  }
+</style>

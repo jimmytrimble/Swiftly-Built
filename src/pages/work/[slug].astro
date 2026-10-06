@@ -1,0 +1,229 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import CtaBand from '@/components/CtaBand.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, prev: all[i - 1] ?? null, next: all[i + 1] ?? null },
+  }));
+}
+const { entry, prev, next } = Astro.props;
+const d = entry.data;
+const meta = `${d.client} · ${d.turnaroundWeeks} weeks · ${d.platforms.join(' and ')}`;
+const timeline = `Scoped in 48 hours, delivered in ${d.turnaroundWeeks} weeks with a TestFlight build every week, submitted to ${d.platforms.length > 1 ? 'both stores' : 'the App Store'} on the agreed date.`;
+---
+
+<Base
+  title={`${d.title} — Case study`}
+  description={`${d.title} for a ${d.client.toLowerCase()}: ${d.result}`}
+  ogType="article"
+>
+  <Section tone="dark" aria-labelledby="cs-h">
+    <Eyebrow>Case study</Eyebrow>
+    <h1 id="cs-h" class="h-display cs-h">
+      {d.title}
+    </h1>
+    <p class="cs-meta">{meta}</p>
+    <p class="cs-result">{d.result}</p>
+  </Section>
+
+  <Section tone="raised" aria-labelledby="problem-h">
+    <div class="two">
+      <h2 id="problem-h">Problem</h2>
+      <p>{d.problem}</p>
+    </div>
+  </Section>
+
+  <Section tone="dark" aria-labelledby="build-h">
+    <div class="two">
+      <h2 id="build-h">Build</h2>
+      <div>
+        <ul class="chips" role="list" aria-label="Stack">
+          {d.stack.map((s) => (
+            <li class="chip">{s}</li>
+          ))}
+        </ul>
+        <p>{d.build}</p>
+        <p class="timeline">{timeline}</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="raised" aria-labelledby="result-h">
+    <div class="two">
+      <h2 id="result-h">Result</h2>
+      <p>{d.resultDetail}</p>
+    </div>
+  </Section>
+
+  <Section tone="dark" aria-labelledby="screens-h" padded={false}>
+    <h2 id="screens-h" class="screens-h">
+      Screens
+    </h2>
+  </Section>
+  <div class="screens-wrap">
+    <ul
+      class="screens container-site"
+      role="list"
+      tabindex="0"
+      aria-label="App screens, scroll horizontally"
+    >
+      {d.screens.map((s, i) => (
+        <li>
+          <Image
+            src={s}
+            alt={`${d.title} screen ${i + 1}`}
+            width={390}
+            height={844}
+            format="avif"
+            quality={60}
+            loading="lazy"
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <nav class="pager" aria-label="Other case studies">
+    <div class="container-site pager__inner">
+      {prev ? (
+        <a href={`/work/${prev.id}`} class="pager__link">
+          <span>← Previous</span>
+          <strong>{prev.data.title}</strong>
+        </a>
+      ) : (
+        <a href="/work" class="pager__link">
+          <span>← All work</span>
+          <strong>Case studies</strong>
+        </a>
+      )}
+      {next ? (
+        <a href={`/work/${next.id}`} class="pager__link pager__link--next">
+          <span>Next →</span>
+          <strong>{next.data.title}</strong>
+        </a>
+      ) : (
+        <a href="/work" class="pager__link pager__link--next">
+          <span>All work →</span>
+          <strong>Case studies</strong>
+        </a>
+      )}
+    </div>
+  </nav>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .cs-h {
+    margin: 0 0 20px;
+  }
+  .cs-meta {
+    color: var(--color-text-muted);
+    margin: 0 0 12px;
+  }
+  .cs-result {
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 500;
+    max-width: 48ch;
+    margin: 0;
+  }
+  .two {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+  .two h2 {
+    font-size: 28px;
+    margin: 0;
+  }
+  .two p {
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 18px;
+    max-width: 62ch;
+  }
+  .two p + .timeline {
+    margin-top: 16px;
+    color: var(--color-text-muted);
+  }
+  .chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding: 0;
+  }
+  @media (max-width: 700px) {
+    .two {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+  .screens-h {
+    font-size: 28px;
+    margin: 0;
+    padding-top: var(--section-y);
+  }
+  .screens-wrap {
+    background: var(--color-jet);
+    padding-bottom: var(--section-y);
+  }
+  .screens {
+    list-style: none;
+    margin: 0;
+    padding-block: 32px 8px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--color-graphite) transparent;
+  }
+  .screens li {
+    flex: 0 0 auto;
+    width: 260px;
+    scroll-snap-align: start;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid var(--color-graphite);
+  }
+  .pager {
+    border-top: 1px solid var(--color-graphite);
+    background: var(--color-ink);
+  }
+  .pager__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 32px;
+  }
+  .pager__link {
+    text-decoration: none;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pager__link span {
+    font-size: 14px;
+    color: var(--color-electric);
+    font-weight: 600;
+  }
+  .pager__link strong {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .pager__link--next {
+    text-align: right;
+    align-items: flex-end;
+  }
+</style>

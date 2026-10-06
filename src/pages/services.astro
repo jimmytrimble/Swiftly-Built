@@ -1,0 +1,234 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { site } from '@/lib/site';
+
+const tiers = [
+  {
+    name: 'Sprint',
+    get: 'Clickable prototype or MVP, iOS first, one core flow',
+    scope: '2 to 3 weeks',
+    price: '[PRICE]',
+  },
+  {
+    name: 'Launch',
+    get: 'Full production app, iOS and Android, backend, auth, store submission',
+    scope: '6 to 10 weeks',
+    price: '[PRICE]',
+  },
+  {
+    name: 'Scale',
+    get: 'Launch plus payments, admin dashboard, analytics, CI/CD',
+    scope: '10 to 16 weeks',
+    price: '[PRICE]',
+  },
+  {
+    name: 'Retainer',
+    get: 'Maintenance, OS updates, feature work',
+    scope: 'Monthly',
+    price: '[PRICE]/mo',
+  },
+  {
+    name: 'Advisory',
+    get: 'Technical due diligence, architecture review, fractional CTO',
+    scope: 'Hourly or day rate',
+    price: '[RATE]/hr',
+  },
+];
+
+const included = [
+  'Written scope within 48 hours',
+  'Weekly TestFlight builds',
+  'Store submission',
+  '30-day support',
+  'Source code and documentation handed over',
+  'Milestone payments 40/40/20',
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${site.url}/services#service`,
+  name: site.legalName,
+  url: `${site.url}/services`,
+  email: site.email,
+  description: 'Fixed-price iOS and Android app development, delivered end to end by one engineer.',
+  areaServed: 'US',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: tiers.map((t) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: t.name, description: t.get },
+    })),
+  },
+};
+---
+
+<Base
+  title="Services and pricing — Swiftly Built"
+  description="Fixed-price tiers for iOS and Android apps: Sprint, Launch, Scale, Retainer, and Advisory. Known price, known date, before work starts."
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <Section tone="dark" aria-labelledby="svc-h">
+    <h1 id="svc-h" class="h-display page-h">
+      Fixed prices. Known dates.
+    </h1>
+    <p class="intro">
+      Fixed-price tiers are the promise: you know the number and the date before we start. Hourly is
+      reserved for advisory work.
+    </p>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Pricing tiers, scrollable">
+      <table class="tiers">
+        <thead>
+          <tr>
+            <th scope="col">Tier</th>
+            <th scope="col">What you get</th>
+            <th scope="col">Typical scope</th>
+            <th scope="col">Starting at</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tiers.map((t) => (
+            <tr>
+              <th scope="row">{t.name}</th>
+              <td>{t.get}</td>
+              <td>{t.scope}</td>
+              <td class="price">{t.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section tone="raised" aria-labelledby="inc-h">
+    <div class="two">
+      <div>
+        <h2 id="inc-h">What is included in every project</h2>
+        <ul class="check" role="list">
+          {included.map((i) => (
+            <li>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--color-electric)"
+                stroke-width="2.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+              >
+                <path d="M5 12.5l4.5 4.5L19 7" />
+              </svg>
+              {i}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Changes</h2>
+        <p>
+          Scope is locked at discovery. Anything added after that is a written change order with its
+          own price and date, agreed before work starts.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .page-h {
+    margin: 0 0 20px;
+  }
+  .intro {
+    font-size: clamp(18px, 2vw, 21px);
+    color: var(--color-text-soft);
+    max-width: 56ch;
+    margin: 0 0 48px;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--color-graphite);
+    border-radius: var(--radius-md);
+    background: var(--color-ink);
+  }
+  .tiers {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  .tiers th,
+  .tiers td {
+    text-align: left;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--color-graphite);
+    vertical-align: top;
+  }
+  .tiers thead th {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+  }
+  .tiers tbody th {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .tiers tbody tr:last-child th,
+  .tiers tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .tiers td {
+    color: var(--color-text-soft);
+  }
+  .price {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--color-white);
+    white-space: nowrap;
+  }
+  .two {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+  }
+  .two h2 {
+    font-size: 28px;
+    margin: 0 0 20px;
+  }
+  .two p {
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 17px;
+    max-width: 48ch;
+  }
+  .check {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .check li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-weight: 500;
+  }
+  @media (max-width: 800px) {
+    .two {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

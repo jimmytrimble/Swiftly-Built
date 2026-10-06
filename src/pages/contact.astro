@@ -1,0 +1,291 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Button from '@/components/Button.astro';
+import { formspreeId, calLink } from '@/lib/site';
+
+const action = `https://formspree.io/f/${formspreeId}`;
+const timelines = ['As soon as possible', '1 to 3 months', '3 to 6 months', 'Not sure'];
+---
+
+<Base
+  title="Book a scoping call — Swiftly Built"
+  description="Book a 20-minute scoping call or send a note. You will hear back within one business day."
+>
+  <Section tone="dark" aria-labelledby="contact-h">
+    <h1 id="contact-h" class="h-display page-h">
+      Let's scope it.
+    </h1>
+
+    <div class="grid">
+      <div class="cal" id="cal-wrap" data-cal-link={calLink}>
+        <h2 class="col-h">Pick a time</h2>
+        <div id="cal-embed" class="cal__embed">
+          <noscript>
+            <a class="text-link" href={`https://cal.com/${calLink}`} target="_blank" rel="noopener">
+              Open the booking page on Cal.com →
+            </a>
+          </noscript>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="col-h">Or send a note</h2>
+        <form
+          id="contact-form"
+          class="form"
+          action={action}
+          method="POST"
+          accept-charset="UTF-8"
+          novalidate
+        >
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="message">What do you want built?</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <div class="field">
+            <label for="timeline">Rough timeline</label>
+            <select id="timeline" name="timeline" required>
+              {timelines.map((t) => (
+                <option value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
+          <!-- Honeypot: hidden from people, filled by bots -->
+          <div class="hp" aria-hidden="true">
+            <label for="_gotcha">Leave this empty</label>
+            <input id="_gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="_subject" value="New scoping request from swiftlybuilt.com" />
+
+          <Button type="submit" variant="primary" id="submit-btn">
+            Send
+          </Button>
+
+          <p class="status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="note">No phone number needed. You will hear back within one business day.</p>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .page-h {
+    margin: 0 0 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .col-h {
+    font-size: 22px;
+    margin: 0 0 20px;
+  }
+  .cal__embed {
+    min-height: 560px;
+    background: var(--color-ink);
+    border: 1px solid var(--color-graphite);
+    border-radius: var(--radius-md);
+    padding: 16px;
+  }
+  .form {
+    display: grid;
+    gap: 20px;
+  }
+  .field {
+    display: grid;
+    gap: 8px;
+  }
+  label {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  input,
+  textarea,
+  select {
+    width: 100%;
+    font: inherit;
+    color: var(--color-white);
+    background: var(--color-ink);
+    border: 1px solid var(--color-graphite);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    min-height: 48px;
+    transition: border-color var(--motion-fast) var(--ease-out);
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-electric);
+    outline-offset: 2px;
+    border-color: var(--color-electric);
+  }
+  input[aria-invalid='true'],
+  textarea[aria-invalid='true'] {
+    border-color: #ff6b6b;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .status {
+    margin: 0;
+    min-height: 1.5em;
+    font-weight: 500;
+  }
+  .status.is-success {
+    color: var(--color-white);
+  }
+  .status.is-error {
+    color: #ff8a8a;
+  }
+  .note {
+    margin: 20px 0 0;
+    color: var(--color-text-muted);
+    font-size: 15px;
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // --- Contact form: progressive enhancement over a normal POST ---
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+  if (form && status && btn) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'status';
+      status.textContent = '';
+      // Native validation, surfaced with aria-invalid
+      let valid = true;
+      form.querySelectorAll<HTMLInputElement>('[required]').forEach((el) => {
+        const ok = el.checkValidity();
+        el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+        if (!ok) valid = false;
+      });
+      if (!valid) {
+        status.className = 'status is-error';
+        status.textContent =
+          'Check the highlighted fields: name, a valid email, and a message are required.';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          status.className = 'status is-success';
+          status.textContent = 'Sent. You will hear back within one business day.';
+          form.reset();
+          btn.textContent = 'Sent';
+        } else {
+          throw new Error(String(res.status));
+        }
+      } catch {
+        status.className = 'status is-error';
+        status.textContent =
+          'The message did not send. Try again, or email hello@swiftlybuilt.com.';
+        btn.disabled = false;
+        btn.textContent = 'Send';
+      }
+    });
+  }
+
+  // --- Cal.com inline embed, lazy-loaded when scrolled into view ---
+  const wrap = document.getElementById('cal-wrap');
+  const target = document.getElementById('cal-embed');
+  if (wrap && target) {
+    const link = wrap.dataset.calLink || '';
+    let loaded = false;
+    const load = () => {
+      if (loaded) return;
+      loaded = true;
+      const w = window as unknown as { Cal?: (...a: unknown[]) => void };
+      // Official Cal.com embed snippet, inserted on demand (vanilla, no React).
+      (function (C: Window, A: string, L: string) {
+        const p = (a: unknown, ar: unknown) => {
+          (a as { q: unknown[] }).q.push(ar);
+        };
+        const d = C.document;
+        const win = C as unknown as Record<string, unknown>;
+        win.Cal =
+          win.Cal ||
+          function (...args: unknown[]) {
+            const cal = win.Cal as { loaded?: boolean; ns: Record<string, unknown>; q: unknown[] };
+            if (!cal.loaded) {
+              cal.ns = {};
+              cal.q = cal.q || [];
+              d.head.appendChild(d.createElement('script')).src = A;
+              cal.loaded = true;
+            }
+            if (args[0] === L) {
+              const api = function (...a: unknown[]) {
+                p(api, a);
+              } as unknown as { q: unknown[] };
+              const namespace = args[1] as string;
+              api.q = api.q || [];
+              if (typeof namespace === 'string') {
+                cal.ns[namespace] = cal.ns[namespace] || api;
+                p(cal.ns[namespace], args);
+                p(cal, ['initNamespace', namespace]);
+              } else p(cal, args);
+              return;
+            }
+            p(cal, args);
+          };
+      })(window, 'https://app.cal.com/embed/embed.js', 'init');
+      w.Cal?.('init', 'scoping', { origin: 'https://app.cal.com' });
+      const ns = (w as unknown as { Cal: { ns: Record<string, (...a: unknown[]) => void> } }).Cal.ns
+        .scoping;
+      ns('inline', {
+        elementOrSelector: '#cal-embed',
+        calLink: link,
+        config: { layout: 'month_view', theme: 'dark' },
+      });
+      ns('ui', {
+        theme: 'dark',
+        cssVarsPerTheme: { dark: { 'cal-brand': '#0A84FF' } },
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      });
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            load();
+            io.disconnect();
+          }
+        },
+        { rootMargin: '200px' },
+      );
+      io.observe(target);
+    } else load();
+  }
+</script>

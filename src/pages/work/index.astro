@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import CaseStudyCard from '@/components/CaseStudyCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+
+const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Work — Swiftly Built"
+  description="Case studies of iOS and Android apps shipped end to end by Swiftly Built: scope, build, launch, and results."
+>
+  <Section tone="light" aria-labelledby="work-h">
+    <Eyebrow onLight>Work</Eyebrow>
+    <h1 id="work-h" class="h-display page-h">
+      Case studies
+    </h1>
+    <ul class="grid" role="list">
+      {all.map((e, i) => (
+        <li>
+          <CaseStudyCard entry={e} loading={i < 3 ? 'eager' : 'lazy'} headingLevel="h2" />
+        </li>
+      ))}
+    </ul>
+  </Section>
+  <CtaBand />
+</Base>
+
+<style>
+  .page-h {
+    margin: 0 0 40px;
+  }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
