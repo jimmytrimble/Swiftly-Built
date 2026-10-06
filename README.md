@@ -14,11 +14,11 @@ pnpm dev               # http://localhost:4321
 
 ## Environment variables
 
-| Variable          | Used for                                                  | Example                     |
-| ----------------- | --------------------------------------------------------- | --------------------------- |
-| `FORMSPREE_ID`    | Contact form endpoint (`https://formspree.io/f/<id>`)     | `xabcdefg`                  |
-| `CAL_LINK`        | Cal.com inline embed on `/contact`                        | `jj/scoping-call`           |
-| `PUBLIC_SITE_URL` | Canonical URLs, sitemap, Open Graph, JSON-LD (no slash)   | `https://swiftlybuilt.com`  |
+| Variable          | Used for                                                | Example                    |
+| ----------------- | ------------------------------------------------------- | -------------------------- |
+| `FORMSPREE_ID`    | Contact form endpoint (`https://formspree.io/f/<id>`)   | `xabcdefg`                 |
+| `CAL_LINK`        | Cal.com inline embed on `/contact`                      | `jj/scoping-call`          |
+| `PUBLIC_SITE_URL` | Canonical URLs, sitemap, Open Graph, JSON-LD (no slash) | `https://swiftlybuilt.com` |
 
 All three are read at build time. Set them in Vercel → Project → Settings → Environment Variables for Production and Preview.
 

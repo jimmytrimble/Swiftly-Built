@@ -2,16 +2,16 @@
 
 ## Placeholders you still need to fill
 
-| Placeholder                        | Where                                                                                      |
-| ---------------------------------- | ------------------------------------------------------------------------------------------ |
-| `[N]` apps shipped, `[N]` wks      | `src/lib/stats.ts` — set as numbers to enable the count-up                                 |
-| `[LINKEDIN URL]`, `[GITHUB URL]`   | `src/lib/site.ts` (used in footer and JSON-LD `sameAs`)                                    |
-| `[PRICE]` ×4, `[RATE]`             | `src/pages/services.astro` → `tiers` array                                                 |
-| `[YEARS]` (Team USA)               | `src/pages/about.astro` → `timeline` array                                                 |
-| `[FOUNDER PHOTO]`                  | `src/pages/index.astro` and `src/pages/about.astro` — replace the `.about__photo` div with an `<Image>` (380×440 source, 2× recommended) |
-| `[APP NAME 1–3]`, result, problem, build, resultDetail | `src/content/work/case-study-{one,two,three}.md` — rename the files to real slugs |
-| `[COVER n]` / `[SCREEN n]` images  | `src/assets/work/*.png` — covers 1200×800, screens 390×844 (2× sources are fine; Astro resizes) |
-| `FORMSPREE_ID`, `CAL_LINK`, `PUBLIC_SITE_URL` | `.env` locally and Vercel env vars                                              |
+| Placeholder                                            | Where                                                                                                                                    |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `[N]` apps shipped, `[N]` wks                          | `src/lib/stats.ts` — set as numbers to enable the count-up                                                                               |
+| `[LINKEDIN URL]`, `[GITHUB URL]`                       | `src/lib/site.ts` (used in footer and JSON-LD `sameAs`)                                                                                  |
+| `[PRICE]` ×4, `[RATE]`                                 | `src/pages/services.astro` → `tiers` array                                                                                               |
+| `[YEARS]` (Team USA)                                   | `src/pages/about.astro` → `timeline` array                                                                                               |
+| `[FOUNDER PHOTO]`                                      | `src/pages/index.astro` and `src/pages/about.astro` — replace the `.about__photo` div with an `<Image>` (380×440 source, 2× recommended) |
+| `[APP NAME 1–3]`, result, problem, build, resultDetail | `src/content/work/case-study-{one,two,three}.md` — rename the files to real slugs                                                        |
+| `[COVER n]` / `[SCREEN n]` images                      | `src/assets/work/*.png` — covers 1200×800, screens 390×844 (2× sources are fine; Astro resizes)                                          |
+| `FORMSPREE_ID`, `CAL_LINK`, `PUBLIC_SITE_URL`          | `.env` locally and Vercel env vars                                                                                                       |
 
 ## Choices the brief left open
 
