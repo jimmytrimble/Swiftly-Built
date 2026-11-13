@@ -1,9 +1,7 @@
 @import './tokens.css';
 @import 'tailwindcss';
 
-/* Map brand tokens into Tailwind utilities (bg-jet, text-electric, font-display, rounded-md, ...) */
-@theme {
-  --color-*: initial;
+:root {
   --color-jet: #0b0b0d;
   --color-graphite: #2a2a2e;
   --color-ink: #141416;
@@ -12,23 +10,13 @@
   --color-mist: #e4e4e7;
   --color-electric: #0a84ff;
   --color-track: #0047ab;
-  --color-muted: #a1a1aa;
-  --color-soft: #d4d4d8;
-  --color-muted-light: #52525b;
-  --color-transparent: transparent;
-
-  --font-display: 'Inter Tight Variable', 'Inter Variable', system-ui, sans-serif;
-  --font-body: 'Inter Variable', 'Inter Fallback', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 16px;
-
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --color-podium: #ff3b4e;
+  --color-flag: #c8102e;
+  --color-text-muted: #a1a1aa;
+  --color-text-soft: #d4d4d8;
+  --color-text-muted-light: #52525b;
 }
 
-/* Metric-matched fallback so text does not shift while Inter loads. */
 @font-face {
   font-family: 'Inter Fallback';
   src: local('Arial');
@@ -48,15 +36,18 @@
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
   }
+
   body {
     margin: 0;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
   }
+
   main {
     flex: 1;
   }
+
   h1,
   h2,
   h3 {
@@ -66,22 +57,27 @@
     line-height: 1.02;
     text-wrap: balance;
   }
+
   h1 {
     letter-spacing: -0.04em;
     line-height: 0.98;
   }
+
   p {
     line-height: 1.55;
   }
+
   :focus-visible {
     outline: 2px solid var(--color-electric);
     outline-offset: 3px;
     border-radius: 2px;
   }
+
   ::selection {
     background: var(--color-electric);
     color: var(--color-white);
   }
+
   img {
     max-width: 100%;
     height: auto;
@@ -96,11 +92,13 @@
     margin-inline: auto;
     padding-inline: 32px;
   }
+
   @media (max-width: 480px) {
     .container-site {
       padding-inline: 20px;
     }
   }
+
   .text-link {
     color: var(--color-electric);
     font-weight: 600;
@@ -108,12 +106,15 @@
     text-underline-offset: 4px;
     transition: color var(--motion-fast) var(--ease-out);
   }
+
   .text-link:hover {
     text-decoration: underline;
   }
+
   .on-light .text-link {
     color: var(--color-track);
   }
+
   .skip-link {
     position: absolute;
     top: 8px;
@@ -127,15 +128,19 @@
     transform: translateY(-200%);
     transition: transform var(--motion-fast) var(--ease-out);
   }
+
   .skip-link:focus {
     transform: translateY(0);
   }
+
   .h-display {
     font-size: clamp(36px, 5vw, 56px);
   }
+
   .h-hero {
     font-size: clamp(48px, 7vw, 84px);
   }
+
   .chip {
     font-family: var(--font-mono);
     font-weight: 500;
@@ -143,12 +148,11 @@
     padding: 6px 10px;
     border: 1px solid var(--color-graphite);
     border-radius: var(--radius-sm);
-    color: var(--color-soft);
+    color: var(--color-text-soft);
     background: var(--color-ink);
   }
 }
 
-/* Reveal on scroll (opt-in via data-reveal). Disabled under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
     opacity: 0;
@@ -158,6 +162,7 @@
       transform var(--motion-base) var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
   }
+
   .js [data-reveal].is-visible {
     opacity: 1;
     transform: none;

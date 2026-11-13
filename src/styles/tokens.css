@@ -7,12 +7,14 @@
   --color-mist: #e4e4e7; /* borders on light */
   --color-electric: #0a84ff; /* accent: buttons, links, logo mark */
   --color-track: #0047ab; /* accent hover / on light backgrounds */
+  --color-podium: #ff3b4e; /* new color for branding */
+  --color-flag: #c8102e; /* another brand color */
   --color-text-muted: #a1a1aa; /* captions on dark (7:1 on jet) */
   --color-text-soft: #d4d4d8; /* body on dark */
   --color-text-muted-light: #52525b; /* captions on light */
 
   --font-display: 'Inter Tight Variable', 'Inter Variable', system-ui, sans-serif;
-  --font-body: 'Inter Variable', 'Inter Fallback', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --radius-sm: 8px;

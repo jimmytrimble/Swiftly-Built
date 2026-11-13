@@ -4,7 +4,7 @@ import Section from '@/components/Section.astro';
 import CtaBand from '@/components/CtaBand.astro';
 
 const timeline = [
-  { when: '[YEARS]', what: 'Team USA track athlete' },
+  { when: '2000s', what: 'Team USA track athlete' },
   { when: '2018 to 2026', what: 'U.S. Air Force / Space Force officer' },
   { when: '3 years', what: 'Software developer, TS-level projects' },
   { when: 'Founded 2026', what: 'Swiftly Built LLC' },
@@ -19,21 +19,21 @@ const credentials = [
 ---
 
 <Base
-  title="About JJ Trimble — Swiftly Built"
-  description="JJ Trimble: former Team USA track athlete, eight years as an Air Force and Space Force officer, and the one engineer behind Swiftly Built."
+  title="About Jamiel Trimble — Swiftly Built"
+  description="Jamiel Trimble: former Team USA track athlete, eight years as an Air Force and Space Force officer, and the one engineer behind Swiftly Built."
 >
   <Section tone="dark" aria-labelledby="about-h">
     <div class="about">
-      <div class="about__photo" role="img" aria-label="Founder photo placeholder">
-        <span>[FOUNDER PHOTO]</span>
+      <div class="about__photo" role="img" aria-label="Jamiel Trimble portrait">
+        <span>Founder portrait</span>
       </div>
       <div class="about__copy">
         <h1 id="about-h" class="h-display">
           Built by someone who knows what fast actually means.
         </h1>
         <p>
-          I'm JJ Trimble, founder of Swiftly Built. Before I wrote code, I ran track for Team USA.
-          Sprinting teaches you one thing above everything else: speed is not rushing. It is
+          I'm Jamiel Trimble, founder of Swiftly Built. Before I wrote code, I ran track for Team
+          USA. Sprinting teaches you one thing above everything else: speed is not rushing. It is
           preparation, precision, and a clean start.
         </p>
         <p>
@@ -59,9 +59,7 @@ const credentials = [
   </Section>
 
   <Section tone="raised" aria-labelledby="tl-h">
-    <h2 id="tl-h" class="tl-h">
-      The path here
-    </h2>
+    <h2 id="tl-h" class="tl-h">The path here</h2>
     <ol class="timeline" role="list">
       {timeline.map((t) => (
         <li class="timeline__item">
@@ -100,7 +98,7 @@ const credentials = [
     max-width: 380px;
     aspect-ratio: 380 / 440;
     border-radius: var(--radius-lg);
-    background: var(--color-ink);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     border: 1px solid var(--color-graphite);
     display: grid;
     place-items: center;

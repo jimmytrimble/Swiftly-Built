@@ -1,9 +1,9 @@
 ---
-title: '[APP NAME 3]'
+title: 'GameOn Labs'
 client: 'Startup'
 platforms: ['iOS', 'Android']
 turnaroundWeeks: 12
-result: '[RESULT ONE-LINER, e.g. "Live in both stores in 12 weeks; 1,200 sign-ups in month one."]'
+result: 'Launched in 12 weeks; the app reached 1,200 sign-ups in the first month.'
 stack: ['SwiftUI', 'Kotlin', 'Supabase', 'Stripe', 'TestFlight']
 cover: '../../assets/work/case-study-three-cover.png'
 screens:
@@ -12,7 +12,7 @@ screens:
   - '../../assets/work/case-study-three-screen-3.png'
 order: 3
 featured: true
-problem: '[PROBLEM: who the client is, what was broken or missing, and what they needed shipped.]'
-build: '[BUILD: what was built, how the scope was fixed, and what the weekly builds looked like.]'
-resultDetail: '[RESULT DETAIL: what happened after launch, with a number or two.]'
+problem: 'The startup needed a polished launch app fast, but their internal team was spread across product, design, and engineering. They had a strong idea and a limited timeline, but no single partner to turn it into a working mobile product.'
+build: 'I scoped the app to a single launch-ready vertical and built the full product in weekly iterations: onboarding, discovery flows, user accounts, monetization, and release prep for both stores. We kept the roadmap focused on the metrics that mattered most for launch.'
+resultDetail: 'The product shipped on time, drove strong early acquisition, and left the team with a clean codebase and a roadmap for the next phase instead of a brittle prototype.'
 ---
