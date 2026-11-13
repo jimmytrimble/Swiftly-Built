@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-const site = process.env.PUBLIC_SITE_URL ?? 'https://swiftlybuilt.com';
+const site = process.env.PUBLIC_SITE_URL ?? 'https://swiftlybuilt.net';
 
 export default defineConfig({
   site,
