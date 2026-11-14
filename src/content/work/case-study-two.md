@@ -1,18 +1,18 @@
 ---
-title: 'NorthLine Roofing'
-client: 'Local business'
+title: 'Naturally Yours Beauty Supply'
+client: 'Retail client'
 platforms: ['iOS']
-turnaroundWeeks: 3
-result: 'Live in three weeks; quote requests moved from phone tag to a booked pipeline.'
+turnaroundWeeks: 8
+result: 'A customer storefront plus an owner app for inventory, orders, and messages.'
 stack: ['SwiftUI', 'Supabase', 'Stripe', 'TestFlight']
-cover: '../../assets/work/case-study-two-cover.png'
+cover: '../../assets/work/ny-shop.jpg'
 screens:
-  - '../../assets/work/case-study-two-screen-1.png'
-  - '../../assets/work/case-study-two-screen-2.png'
-  - '../../assets/work/case-study-two-screen-3.png'
+  - '../../assets/work/ny-shop.jpg'
+  - '../../assets/work/ny-inventory.jpg'
+  - '../../assets/work/ny-login.jpg'
 order: 2
 featured: true
-problem: 'The roofing company was losing jobs because inquiries were missed, quote requests were hard to track, and the team had no way to manage leads from mobile while on a job site.'
-build: 'I built a lightweight sales app for field crews and the office team: quote request capture, job status updates, and secure photo uploads in one place. The scope was narrowed to the highest-value workflow so it shipped quickly and was used daily.'
-resultDetail: 'Within the first month, the business increased quote conversions, reduced response time to inbound requests, and kept every lead visible in one system instead of scattered texts and voicemails.'
+problem: 'A beauty supply business wanted to sell online without stitching together a web store, a point-of-sale tool, and a spreadsheet for stock. They needed customers to shop easily and the owner to run the whole thing from a phone.'
+build: 'I built two connected iOS apps on a shared backend: a customer storefront for browsing and checkout, and an owner app for inventory, orders, and customer messages. Payments run through Stripe, and both apps stay in sync so stock and orders are always current.'
+resultDetail: 'The storefront and owner app are in production, giving the business a single system for selling, managing inventory, and talking to customers in one place.'
 ---

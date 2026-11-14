@@ -40,9 +40,21 @@ const layers = [
 ] as const;
 
 const steps = [
-  { n: '01', title: 'On your marks', text: 'Discovery call — 20 minutes on what you need and who it is for.' },
-  { n: '02', title: 'Set', text: 'Scope and quote — A written scope, your quote, and a delivery date within 48 hours.' },
-  { n: '03', title: 'Go', text: 'Weekly demo builds — A TestFlight build on your phone every week.' },
+  {
+    n: '01',
+    title: 'On your marks',
+    text: 'Discovery call — 20 minutes on what you need and who it is for.',
+  },
+  {
+    n: '02',
+    title: 'Set',
+    text: 'Scope and quote — A written scope, your quote, and a delivery date within 48 hours.',
+  },
+  {
+    n: '03',
+    title: 'Go',
+    text: 'Weekly demo builds — A TestFlight build on your phone every week.',
+  },
   {
     n: '04',
     title: 'Finish line',
@@ -94,7 +106,6 @@ const jsonLd = {
 
 <Base title="Swiftly Built — Fast. Complete. Built to last." description={site.description}>
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
-
   <Section tone="dark" aria-labelledby="hero-h">
     <div class="hero">
       <div class="hero__copy">
@@ -102,15 +113,21 @@ const jsonLd = {
         <h1 id="hero-h" class="h-hero hero__h">
           <span>Fast.</span>
           <span>Complete.</span>
-          <span>Built to last<span class="period">.</span></span>
+          <span>
+            Built to last<span class="period">.</span>
+          </span>
         </h1>
         <p class="hero__sub">
           Production-ready iOS and Android apps, delivered end to end by one engineer. Weeks, not
           quarters.
         </p>
         <div class="hero__actions">
-          <Button href="/contact" variant="primary">Book a 20-minute call</Button>
-          <Button href="/work" variant="outline">See the work</Button>
+          <Button href="/contact" variant="primary">
+            Book a 20-minute call
+          </Button>
+          <Button href="/work" variant="outline">
+            See the work
+          </Button>
         </div>
       </div>
 
@@ -132,15 +149,25 @@ const jsonLd = {
   <section class="proof" aria-label="Track record">
     <div class="container-site proof__grid">
       <Counter value={stats.appsShipped} label="apps shipped to the App Store" />
-      <Counter value={stats.avgTurnaroundWeeks} suffix="wks" label="average turnaround, scope to store" />
-      <Counter value={stats.defenseYears} suffix="yrs" label="defense technology and program management" />
+      <Counter
+        value={stats.avgTurnaroundWeeks}
+        suffix="wks"
+        label="average turnaround, scope to store"
+      />
+      <Counter
+        value={stats.defenseYears}
+        suffix="yrs"
+        label="defense technology and program management"
+      />
       <Counter value={stats.clearance} label="active clearance" static />
     </div>
   </section>
 
   <Section tone="dark" aria-labelledby="get-h">
     <Eyebrow>What you get</Eyebrow>
-    <h2 id="get-h" class="h-display section-h">One builder. Every layer. Zero hand-offs.</h2>
+    <h2 id="get-h" class="h-display section-h">
+      One builder. Every layer. Zero hand-offs.
+    </h2>
     <p class="section-intro">
       Every project is scoped and quoted on its own. Tell me what you need and I'll come back with a
       price and a delivery date.
@@ -160,9 +187,13 @@ const jsonLd = {
     <div class="split-head">
       <div>
         <Eyebrow onLight>Featured work</Eyebrow>
-        <h2 id="work-h" class="h-display section-h">Shipped, not promised.</h2>
+        <h2 id="work-h" class="h-display section-h">
+          Shipped, not promised.
+        </h2>
       </div>
-      <a href="/work" class="text-link">All case studies →</a>
+      <a href="/work" class="text-link">
+        All case studies →
+      </a>
     </div>
     <ul class="cards" role="list">
       {featured.map((e, i) => (
@@ -174,23 +205,42 @@ const jsonLd = {
     <div class="more-screens">
       <h3>More screens from shipped apps</h3>
       <div class="screen-row" role="list" aria-label="More app screens">
-        {all.flatMap((entry) => entry.data.screens.slice(0, 2)).slice(0, 6).map((screen, index) => (
-          <div class="screen-card" role="listitem" key={index}>
-            <Image src={screen} alt={`App screen ${index + 1}`} width={180} height={390} format="avif" quality={60} loading="lazy" />
-          </div>
-        ))}
+        {all
+          .flatMap((entry) => entry.data.screens.slice(0, 2))
+          .slice(0, 6)
+          .map((screen, index) => (
+            <div class="screen-card" role="listitem" key={index}>
+              <Image
+                src={screen}
+                alt={`App screen ${index + 1}`}
+                width={180}
+                height={390}
+                format="avif"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+          ))}
       </div>
     </div>
   </Section>
 
   <Section tone="dark" aria-labelledby="how-h">
     <Eyebrow>How it works</Eyebrow>
-    <h2 id="how-h" class="h-display section-h">From the blocks to the finish line.</h2>
-    <div class="lane-divider" aria-hidden="true"><span /><span /><span /></div>
+    <h2 id="how-h" class="h-display section-h">
+      From the blocks to the finish line.
+    </h2>
+    <div class="lane-divider" aria-hidden="true">
+      <span />
+      <span />
+      <span />
+    </div>
     <ol class="steps" role="list">
       {steps.map((s, i) => (
         <Reveal as="li" index={i} class="step">
-          <span class:list={['step__n', { 'step__n--podium': s.podium }]}>{s.n} · {s.podium ? 'Finish line' : s.title}</span>
+          <span class:list={['step__n', { 'step__n--podium': s.podium }]}>
+            {s.n} · {s.podium ? 'Finish line' : s.title}
+          </span>
           <h3>{s.title}</h3>
           <p>{s.text}</p>
         </Reveal>
@@ -216,13 +266,17 @@ const jsonLd = {
       </div>
       <div>
         <Eyebrow>About the founder</Eyebrow>
-        <h2 id="about-h" class="h-display section-h">Built by someone who knows what fast actually means.</h2>
+        <h2 id="about-h" class="h-display section-h">
+          Built by someone who knows what fast actually means.
+        </h2>
         <p class="about__p">
           Jamiel Trimble ran track for Team USA, then spent eight years as an Air Force and Space
           Force officer leading technical programs. Swiftly Built is the engineer he wanted to hire
           and could not find.
         </p>
-        <a href="/about" class="text-link">Read the story →</a>
+        <a href="/about" class="text-link">
+          Read the story →
+        </a>
       </div>
     </div>
   </Section>
@@ -284,7 +338,7 @@ const jsonLd = {
     border-radius: 40px;
     border: 1px solid var(--color-graphite);
     background: var(--color-ink);
-    box-shadow: 0 10px 32px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
   }
   .phone img {
     width: 100%;
@@ -448,9 +502,15 @@ const jsonLd = {
     display: block;
     border-radius: 999px;
   }
-  .lane-divider span:nth-child(1) { background: #3f3f46; }
-  .lane-divider span:nth-child(2) { background: var(--color-electric); }
-  .lane-divider span:nth-child(3) { background: var(--color-podium); }
+  .lane-divider span:nth-child(1) {
+    background: #3f3f46;
+  }
+  .lane-divider span:nth-child(2) {
+    background: var(--color-electric);
+  }
+  .lane-divider span:nth-child(3) {
+    background: var(--color-podium);
+  }
 
   .steps {
     list-style: none;
@@ -462,7 +522,7 @@ const jsonLd = {
   }
   .step {
     padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.12);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
   .step__n {
     font-family: var(--font-mono);
@@ -543,7 +603,7 @@ const jsonLd = {
     max-width: 380px;
     aspect-ratio: 380 / 440;
     border-radius: var(--radius-lg);
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border: 1px solid var(--color-graphite);
     display: grid;
     place-items: center;

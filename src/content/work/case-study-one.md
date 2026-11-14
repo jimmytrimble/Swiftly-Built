@@ -1,18 +1,18 @@
 ---
-title: 'Harbor Health'
-client: 'Outpatient clinic'
-platforms: ['iOS', 'Android']
-turnaroundWeeks: 8
-result: 'Live in both stores in 8 weeks; first-month patient check-ins doubled.'
-stack: ['SwiftUI', 'Kotlin', 'Supabase', 'Stripe', 'TestFlight']
-cover: '../../assets/work/case-study-one-cover.png'
+title: 'MovieBuff'
+client: 'Consumer app'
+platforms: ['iOS']
+turnaroundWeeks: 10
+result: 'Movie discovery with trailer reels, recommendations, watchlists, and friends.'
+stack: ['SwiftUI', 'Supabase', 'TestFlight']
+cover: '../../assets/work/moviebuff-browse.jpg'
 screens:
-  - '../../assets/work/case-study-one-screen-1.png'
-  - '../../assets/work/case-study-one-screen-2.png'
-  - '../../assets/work/case-study-one-screen-3.png'
+  - '../../assets/work/moviebuff-browse.jpg'
+  - '../../assets/work/moviebuff-reels.jpg'
+  - '../../assets/work/moviebuff-saved.jpg'
 order: 1
 featured: true
-problem: 'The clinic had a patient intake process split across forms, calls, and spreadsheets. Patients were dropping off before booking, and staff were manually reconciling updates across three different tools.'
-build: 'I replaced the fragmented process with a single mobile-first patient experience: online appointment booking, intake capture, secure records access, and a simple admin dashboard for staff review. The work was delivered in weekly build cycles with real feedback from the clinic team every step of the way.'
-resultDetail: 'After launch, the clinic cut manual intake work by 60%, reduced appointment no-shows, and shipped a public-facing app that patients actually used in weekly check-ins.'
+problem: 'Finding something to watch is scattered across trailers, reviews, and streaming apps. People wanted one place to discover films, keep a watchlist, and see what friends were into — without hopping between a half-dozen sites.'
+build: 'I built a native iOS app around fast discovery: a searchable catalog, swipeable trailer reels, personalized recommendations, and shareable watchlists tied to a lightweight social graph. Delivered in weekly TestFlight builds so the feel of the reels and browse flow could be tuned with real use.'
+resultDetail: 'The app is in production on the App Store, with trailer reels and watchlists as the daily-use features and a recommendations loop that keeps people browsing.'
 ---

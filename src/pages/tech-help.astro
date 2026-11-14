@@ -1,0 +1,159 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Button from '@/components/Button.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { site } from '@/lib/site';
+
+const panels = [
+  {
+    title: 'Software advice',
+    items: [
+      'Choosing a platform, vendor, or tech stack',
+      'Code and architecture reviews',
+      'App Store and Play Store problems',
+      'Security basics for small teams',
+    ],
+  },
+  {
+    title: 'Tech support',
+    items: [
+      'Laptop, phone, and tablet setup and troubleshooting',
+      'Wi-Fi, printers, and small-office networks',
+      'Backups and moving to a new device',
+      'Slow, crashing, or misbehaving machines',
+    ],
+  },
+  {
+    title: 'How sessions work',
+    items: [
+      'Remote, or on-site around Columbia, MD',
+      'One-off sessions or ongoing support',
+      'Quoted after a short call about the issue',
+    ],
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site.url}/tech-help#service`,
+  name: 'Tech advice and support',
+  url: `${site.url}/tech-help`,
+  provider: { '@id': `${site.url}/#business` },
+  areaServed: 'US',
+  description:
+    'Straight answers on software questions and hands-on help with everyday hardware. Quick sessions, no jargon.',
+};
+---
+
+<Base
+  title="Tech help — Swiftly Built"
+  description="Tech advice and support: straight answers on software questions and hands-on help with everyday hardware. Quick sessions, no jargon."
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <Section tone="dark" aria-labelledby="th-h">
+    <div class="th-head">
+      <div>
+        <Eyebrow>Tech advice and support</Eyebrow>
+        <h1 id="th-h" class="h-display page-h">
+          Not every problem needs a new app.
+        </h1>
+        <p class="intro">
+          Straight answers on software questions and hands-on help with everyday hardware. Quick
+          sessions, no jargon.
+        </p>
+      </div>
+      <Button href="/contact" variant="outline">
+        Ask a tech question
+      </Button>
+    </div>
+
+    <ul class="panels" role="list">
+      {panels.map((p) => (
+        <li class="panel">
+          <h2>{p.title}</h2>
+          <ul class="panel__items" role="list">
+            {p.items.map((i) => (
+              <li>{i}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <CtaBand
+    heading="Have a tech question? Let's sort it out this week."
+    cta="Book a 20-minute call"
+  />
+</Base>
+
+<style>
+  .th-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .page-h {
+    margin: 0 0 20px;
+    max-width: 22ch;
+  }
+  .intro {
+    font-size: clamp(18px, 2vw, 21px);
+    color: var(--color-text-soft);
+    max-width: 56ch;
+    margin: 0;
+  }
+  .panels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .panel {
+    background: var(--color-ink);
+    border: 1px solid var(--color-graphite);
+    border-radius: var(--radius-md);
+    padding: 28px;
+  }
+  .panel h2 {
+    font-size: 22px;
+    margin: 0 0 16px;
+  }
+  .panel__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    color: var(--color-text-soft);
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+  .panel__items li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .panel__items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--color-electric);
+  }
+  @media (max-width: 900px) {
+    .panels {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

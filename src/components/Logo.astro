@@ -1,7 +1,8 @@
 ---
 /**
- * Brand logo. The chevron is always electric blue; the baseline uses currentColor
- * (white on dark, jet on light). Wordmark: "Swiftly Built" in Inter Tight 800.
+ * Brand logo: the running figure mark plus the "Swiftly Built" wordmark in
+ * Inter Tight 800. The mark is electric blue on dark surfaces and the black
+ * (original) mark on light surfaces. Source art is 445×350.
  */
 interface Props {
   variant?: 'mark' | 'horizontal' | 'stacked';
@@ -11,32 +12,24 @@ interface Props {
 }
 const { variant = 'horizontal', size = 32, onLight = false, class: className = '' } = Astro.props;
 const wordColor = onLight ? 'var(--color-jet)' : 'var(--color-white)';
-const builtColor = onLight ? 'var(--color-track)' : 'var(--color-electric)';
 const markSize = Math.max(28, size);
+const markWidth = Math.round((markSize * 445) / 350);
+const markSrc = onLight ? '/brand/mark-original.png' : '/brand/mark-electric.png';
 ---
 
 <span
   class:list={['logo', `logo--${variant}`, className]}
   style={`--logo-size:${markSize}px; --word-size:${variant === 'stacked' ? markSize * 0.8 : markSize * 0.72}px; color:${wordColor};`}
 >
-  <svg
+  <img
     class="logo__mark"
-    viewBox="0 0 200 160"
-    width={markSize}
-    height={Math.round(markSize * 0.8)}
-    role="img"
-    aria-label="Swiftly Built brand mark"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 128 L62 50 L88 72 L104 34 L112 44 L136 118 L156 78 L182 128" stroke="var(--color-electric)" stroke-width="10"/>
-      <path d="M28 128H172" stroke="currentColor" stroke-width="6"/>
-      <path d="M26 92H176" stroke="rgba(255,255,255,0.13)" stroke-width="2"/>
-      <path d="M48 40C62 28 74 24 90 24" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
-      <path d="M95 25L118 16" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-      <path d="M136 115L152 96" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-    </g>
-  </svg>
+    src={markSrc}
+    width={markWidth}
+    height={markSize}
+    alt=""
+    aria-hidden="true"
+    decoding="async"
+  />
 
   {variant !== 'mark' && (
     <span class="logo__word" aria-hidden="true">
