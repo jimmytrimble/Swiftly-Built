@@ -1,5 +1,5 @@
 ---
-title: 'GameOn'
+title: 'Game On'
 client: 'Sports platform'
 platforms: ['iOS']
 turnaroundWeeks: 12

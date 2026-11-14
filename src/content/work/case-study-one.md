@@ -1,5 +1,5 @@
 ---
-title: 'MovieBuff'
+title: 'Movie Buff'
 client: 'Consumer app'
 platforms: ['iOS']
 turnaroundWeeks: 10

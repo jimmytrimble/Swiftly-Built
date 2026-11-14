@@ -3,7 +3,7 @@ export const site = {
   legalName: 'Swiftly Built LLC',
   url: import.meta.env.PUBLIC_SITE_URL ?? 'https://swiftlybuilt.com',
   plausibleDomain: 'swiftlybuilt.com',
-  email: 'hello@swiftlybuilt.com',
+  email: 'jamiel@swiftlybuilt.net',
   founder: 'Jamiel Trimble',
   location: 'Columbia, MD',
   linkedin: 'https://www.linkedin.com/in/jamiel-trimble/',
