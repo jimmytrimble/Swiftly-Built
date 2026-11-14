@@ -2,7 +2,7 @@
 title: 'Movie Buff'
 client: 'Consumer app'
 platforms: ['iOS']
-turnaroundWeeks: 10
+turnaroundWeeks: 3
 result: 'Movie discovery with trailer reels, recommendations, watchlists, and friends.'
 stack: ['SwiftUI', 'Supabase', 'TestFlight']
 cover: '../../assets/work/moviebuff-browse.jpg'

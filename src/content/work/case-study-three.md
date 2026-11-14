@@ -2,7 +2,7 @@
 title: 'Game On'
 client: 'Sports platform'
 platforms: ['iOS']
-turnaroundWeeks: 12
+turnaroundWeeks: 5
 result: 'A sports app that connects athletes and helps them organize and play.'
 stack: ['SwiftUI', 'Supabase', 'TestFlight']
 cover: '../../assets/work/gameon-login.jpg'

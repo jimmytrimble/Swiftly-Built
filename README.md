@@ -21,7 +21,7 @@ The site runs locally at http://localhost:4321.
 ```bash
 FORMSPREE_ID=your-formspree-id
 CAL_LINK=jamiel-trimble/scoping-call
-PUBLIC_SITE_URL=https://swiftlybuilt.com
+PUBLIC_SITE_URL=https://swiftlybuilt.net
 ```
 
 ## Scripts

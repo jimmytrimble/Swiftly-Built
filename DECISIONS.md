@@ -2,16 +2,12 @@
 
 ## Placeholders you still need to fill
 
-| Placeholder                                            | Where                                                                                                                                    |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `[N]` apps shipped, `[N]` wks                          | `src/lib/stats.ts` — set as numbers to enable the count-up                                                                               |
-| `[LINKEDIN URL]`, `[GITHUB URL]`                       | `src/lib/site.ts` (used in footer and JSON-LD `sameAs`)                                                                                  |
-| `[PRICE]` ×4, `[RATE]`                                 | `src/pages/services.astro` → `tiers` array                                                                                               |
-| `[YEARS]` (Team USA)                                   | `src/pages/about.astro` → `timeline` array                                                                                               |
-| `[FOUNDER PHOTO]`                                      | `src/pages/index.astro` and `src/pages/about.astro` — replace the `.about__photo` div with an `<Image>` (380×440 source, 2× recommended) |
-| `[APP NAME 1–3]`, result, problem, build, resultDetail | `src/content/work/case-study-{one,two,three}.md` — rename the files to real slugs                                                        |
-| `[COVER n]` / `[SCREEN n]` images                      | `src/assets/work/*.png` — covers 1200×800, screens 390×844 (2× sources are fine; Astro resizes)                                          |
-| `FORMSPREE_ID`, `CAL_LINK`, `PUBLIC_SITE_URL`          | `.env` locally and Vercel env vars                                                                                                       |
+| Placeholder                      | Where                                                   |
+| -------------------------------- | ------------------------------------------------------- |
+| `[LINKEDIN URL]`, `[GITHUB URL]` | `src/lib/site.ts` (used in footer and JSON-LD `sameAs`) |
+| `[PRICE]` ×4, `[RATE]`           | `src/pages/services.astro` → `tiers` array              |
+| `[YEARS]` (Team USA)             | `src/pages/about.astro` → `timeline` array              |
+| `FORMSPREE_ID`, `CAL_LINK`       | `.env` locally and Render env vars                      |
 
 ## Choices the brief left open
 
@@ -29,7 +25,7 @@
 12. **Homepage "Built for"** separators and about-teaser photo are plain CSS; the photo placeholder is a bordered ink box with mono text.
 13. **404 page** is `noindex` and filtered out of the sitemap.
 14. **ESLint** is flat-config with `typescript-eslint` + `eslint-plugin-astro`; Prettier uses `prettier-plugin-astro`. `pnpm lint`, `pnpm check`, `pnpm build` all pass with zero warnings.
-15. **Placeholder/brand images** are produced by `scripts/gen-assets.mjs` (sharp). The OG image and apple-touch-icon embed real Inter Tight; regenerate after any logo change.
+15. **Brand icons and the OG image** are produced by `scripts/gen-favicons.mjs` (sharp) from the running-figure mark (`public/brand/mark-*.png`): `favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, and `og-default.png`. The OG image embeds real Inter Tight; regenerate (`node scripts/gen-favicons.mjs`) after any logo change.
 16. **Case-study card heading level** is `h3` on the homepage and `h2` on `/work` to keep heading order correct on each page.
 17. **Reduced motion**: the global `prefers-reduced-motion` rule collapses all transitions/animations; the counter, reveal, and hero crossfade scripts also check the media query and skip entirely.
 

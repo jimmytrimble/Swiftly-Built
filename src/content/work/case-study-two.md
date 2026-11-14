@@ -1,8 +1,8 @@
 ---
 title: 'Naturally Yours Beauty Supply'
 client: 'Retail client'
-platforms: ['iOS']
-turnaroundWeeks: 8
+platforms: ['iOS', 'Android']
+turnaroundWeeks: 6
 result: 'A customer storefront plus an owner app for inventory, orders, and messages.'
 stack: ['SwiftUI', 'Supabase', 'Stripe', 'TestFlight']
 cover: '../../assets/work/ny-shop.jpg'
