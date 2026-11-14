@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 import CtaBand from '@/components/CtaBand.astro';
+import founder from '@/assets/brand/founder.jpg';
 
 const timeline = [
   { when: '2000s', what: 'Team USA track athlete' },
@@ -24,9 +26,14 @@ const credentials = [
 >
   <Section tone="dark" aria-labelledby="about-h">
     <div class="about">
-      <div class="about__photo" role="img" aria-label="Jamiel Trimble portrait">
-        <span>Founder portrait</span>
-      </div>
+      <Image
+        class="about__photo"
+        src={founder}
+        alt="Jamiel Trimble, founder of Swiftly Built"
+        width={600}
+        format="avif"
+        quality={70}
+      />
       <div class="about__copy">
         <h1 id="about-h" class="h-display">
           Built by someone who knows what fast actually means.
@@ -100,13 +107,10 @@ const credentials = [
     max-width: 380px;
     aspect-ratio: 380 / 440;
     border-radius: var(--radius-lg);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border: 1px solid var(--color-graphite);
-    display: grid;
-    place-items: center;
-    font-family: var(--font-mono);
-    color: var(--color-text-muted);
-    font-size: 14px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
   .about__copy h1 {
     margin: 0 0 32px;

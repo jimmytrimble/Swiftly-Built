@@ -12,6 +12,7 @@ import CaseStudyCard from '@/components/CaseStudyCard.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import { site } from '@/lib/site';
 import { stats } from '@/lib/stats';
+import founder from '@/assets/brand/founder.jpg';
 
 const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const featured = all.filter((e) => e.data.featured).slice(0, 3);
@@ -261,9 +262,14 @@ const jsonLd = {
 
   <Section tone="dark" aria-labelledby="about-h">
     <div class="about">
-      <div class="about__photo" role="img" aria-label="Jamiel Trimble founder photo">
-        <span>Founder photo</span>
-      </div>
+      <Image
+        class="about__photo"
+        src={founder}
+        alt="Jamiel Trimble, founder of Swiftly Built"
+        width={600}
+        format="avif"
+        quality={70}
+      />
       <div>
         <Eyebrow>About the founder</Eyebrow>
         <h2 id="about-h" class="h-display section-h">
@@ -603,13 +609,10 @@ const jsonLd = {
     max-width: 380px;
     aspect-ratio: 380 / 440;
     border-radius: var(--radius-lg);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border: 1px solid var(--color-graphite);
-    display: grid;
-    place-items: center;
-    font-family: var(--font-mono);
-    color: var(--color-text-muted);
-    font-size: 14px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
   .about__p {
     color: var(--color-text-soft);
