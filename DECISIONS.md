@@ -5,7 +5,6 @@
 | Placeholder                      | Where                                                   |
 | -------------------------------- | ------------------------------------------------------- |
 | `[LINKEDIN URL]`, `[GITHUB URL]` | `src/lib/site.ts` (used in footer and JSON-LD `sameAs`) |
-| `[PRICE]` ×4, `[RATE]`           | `src/pages/services.astro` → `tiers` array              |
 | `[YEARS]` (Team USA)             | `src/pages/about.astro` → `timeline` array              |
 | `FORMSPREE_ID`, `CAL_LINK`       | `.env` locally and Render env vars                      |
 

@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import { site } from '@/lib/site';
 
@@ -9,31 +10,31 @@ const tiers = [
     name: 'Sprint',
     get: 'Clickable prototype or MVP, iOS first, one core flow',
     scope: '2 to 3 weeks',
-    price: '$6,500',
+    price: '~$3,500',
   },
   {
     name: 'Launch',
     get: 'Full production app, iOS and Android, backend, auth, store submission',
     scope: '6 to 10 weeks',
-    price: '$18,000',
+    price: '~$8,000',
   },
   {
     name: 'Scale',
     get: 'Launch plus payments, admin dashboard, analytics, CI/CD',
     scope: '10 to 16 weeks',
-    price: '$30,000',
+    price: '~$12,000',
   },
   {
     name: 'Retainer',
     get: 'Maintenance, OS updates, feature work',
     scope: 'Monthly',
-    price: '$1,500/mo',
+    price: 'By scope',
   },
   {
     name: 'Advisory',
     get: 'Technical due diligence, architecture review, fractional CTO',
-    scope: 'Hourly or day rate',
-    price: '$200/hr',
+    scope: 'By project',
+    price: 'By scope',
   },
 ];
 
@@ -46,6 +47,41 @@ const included = [
   'Milestone payments 40/40/20',
 ];
 
+const services = [
+  {
+    title: 'Mobile apps',
+    text: 'Native iOS and Android apps, designed and built end to end — from first sketch to the App Store and Play Store.',
+  },
+  {
+    title: 'Websites and landing pages',
+    text: 'Fast, modern marketing sites (like this one) that load instantly and read well on every screen.',
+  },
+  {
+    title: 'Backend and deployment',
+    text: 'Auth, databases, APIs, and hosting set up, monitored, and documented so you fully own it.',
+  },
+  {
+    title: 'Payments',
+    text: 'Stripe, Apple Pay, subscriptions, and in-app purchases wired in and tested.',
+  },
+  {
+    title: 'AI features',
+    text: 'Smart features powered by on-device or API-based AI, built in where they add real value.',
+  },
+  {
+    title: 'Store launch and support',
+    text: 'Store listings, review, and release handled — plus 30 days of post-launch support included.',
+  },
+  {
+    title: 'Business IT and email',
+    text: 'Company email setup and management, plus day-to-day IT and tech support for small teams.',
+  },
+  {
+    title: 'Tech advice and support',
+    text: 'Device and network troubleshooting, and straight technical guidance when you just need an answer.',
+  },
+];
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -53,7 +89,7 @@ const jsonLd = {
   name: site.legalName,
   url: `${site.url}/services`,
   email: site.email,
-  description: 'Fixed-price iOS and Android app development, delivered end to end by one engineer.',
+  description: 'iOS and Android app development, delivered end to end by one engineer.',
   areaServed: 'US',
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -68,16 +104,17 @@ const jsonLd = {
 
 <Base
   title="Services and pricing — Swiftly Built"
-  description="Fixed-price tiers for iOS and Android apps: Sprint, Launch, Scale, Retainer, and Advisory. Known price, known date, before work starts."
+  description="Everything Swiftly Built offers — apps, websites, backend, payments, AI, business IT and email — with rough starting prices and a firm quote before any work begins."
 >
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   <Section tone="dark" aria-labelledby="svc-h">
     <h1 id="svc-h" class="h-display page-h">
-      Fixed prices. Known dates.
+      Clear scope. Honest pricing.
     </h1>
     <p class="intro">
-      Fixed-price tiers are the promise: you know the number and the date before we start. Hourly is
-      reserved for advisory work.
+      The numbers below are rough starting points, not final quotes — every project is priced on its
+      own once I know what you need. You'll always get a firm price and a delivery date before any
+      work begins, so don't let a figure stop you from reaching out.
     </p>
 
     <div class="table-wrap" tabindex="0" role="region" aria-label="Pricing tiers, scrollable">
@@ -102,6 +139,32 @@ const jsonLd = {
         </tbody>
       </table>
     </div>
+
+    <p class="tiers-note">
+      Rough starting points — final pricing depends on the features and scope of your project.
+      <a href="/contact" class="text-link">
+        Reach out for a quote
+      </a>{' '}
+      and we'll scope it together, with a firm number before any work begins.
+    </p>
+  </Section>
+
+  <Section tone="light" aria-labelledby="offer-h">
+    <Eyebrow onLight>What I offer</Eyebrow>
+    <h2 id="offer-h" class="h-display offer-h">
+      Everything I can help with.
+    </h2>
+    <p class="offer-intro">
+      From a first idea to a shipped app — and the day-to-day tech and IT to keep it all running.
+    </p>
+    <ul class="offer-grid" role="list">
+      {services.map((s) => (
+        <li class="offer-card">
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ul>
   </Section>
 
   <Section tone="raised" aria-labelledby="inc-h">
@@ -228,6 +291,60 @@ const jsonLd = {
   }
   @media (max-width: 800px) {
     .two {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tiers-note {
+    margin: 20px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text-soft);
+    max-width: 72ch;
+  }
+
+  .offer-h {
+    margin: 0 0 16px;
+    max-width: 24ch;
+  }
+  .offer-intro {
+    font-size: clamp(17px, 2vw, 20px);
+    max-width: 60ch;
+    margin: 0 0 40px;
+    color: var(--color-text-muted-light);
+  }
+  .offer-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .offer-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-mist);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+  .offer-card h3 {
+    font-size: 18px;
+    margin: 0 0 8px;
+    color: var(--color-jet);
+  }
+  .offer-card p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-text-muted-light);
+  }
+  @media (max-width: 1000px) {
+    .offer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .offer-grid {
       grid-template-columns: 1fr;
     }
   }
