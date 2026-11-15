@@ -37,7 +37,7 @@ pnpm check
 
 ## Deployment
 
-This project targets Vercel and uses `@astrojs/vercel` in static mode. Add the environment variables above in your Vercel project settings and deploy the repository.
+This project is a static Astro build (`output: 'static'`) deployed on Render as a Static Site. Set the build command to `pnpm build`, the publish directory to `dist`, and add the environment variables above in your Render service settings.
 
 ## Notes
 

@@ -17,12 +17,21 @@ const panels = [
     ],
   },
   {
-    title: 'Tech support',
+    title: 'Business IT and email',
+    items: [
+      'Company email setup and management (Google Workspace, Microsoft 365)',
+      'Day-to-day IT and tech support for small businesses',
+      'Accounts, devices, and access for your team',
+      'Wi-Fi, printers, and office networks',
+    ],
+  },
+  {
+    title: 'Personal tech support',
     items: [
       'Laptop, phone, and tablet setup and troubleshooting',
-      'Wi-Fi, printers, and small-office networks',
       'Backups and moving to a new device',
       'Slow, crashing, or misbehaving machines',
+      'Getting new devices working together',
     ],
   },
   {
@@ -61,7 +70,8 @@ const jsonLd = {
           Not every problem needs a new app.
         </h1>
         <p class="intro">
-          Straight answers on software questions and hands-on help with everyday hardware. Quick
+          Straight answers on software questions, hands-on help with everyday hardware, and the
+          ongoing IT a small business needs — from company email to the office network. Quick
           sessions, no jargon.
         </p>
       </div>
@@ -114,7 +124,7 @@ const jsonLd = {
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
   .panel {

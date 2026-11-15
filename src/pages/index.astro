@@ -66,9 +66,9 @@ const steps = [
 
 const builtFor = [
   'Clinics and practices',
-  'Local businesses',
+  'Small businesses',
   'Startups',
-  'Cleared and defense teams',
+  'Creators and founders',
 ];
 
 const jsonLd = {
@@ -110,7 +110,7 @@ const jsonLd = {
   <Section tone="dark" aria-labelledby="hero-h">
     <div class="hero">
       <div class="hero__copy">
-        <Eyebrow>iOS · Android · AI · Tech support</Eyebrow>
+        <Eyebrow>iOS · Android · AI · IT &amp; tech support</Eyebrow>
         <h1 id="hero-h" class="h-hero hero__h">
           <span>Fast.</span>
           <span>Complete.</span>
@@ -154,12 +154,8 @@ const jsonLd = {
         suffix="wks"
         label="average turnaround, scope to store"
       />
-      <Counter
-        value={stats.defenseYears}
-        suffix="yrs"
-        label="defense technology and program management"
-      />
-      <Counter value={stats.clearance} label="active clearance" static />
+      <Counter value={stats.scopeQuoteHours} suffix="hrs" label="to a written scope and quote" />
+      <Counter value={stats.supportDays} suffix="days" label="of post-launch support included" />
     </div>
   </section>
 

@@ -13,6 +13,6 @@ screens:
 order: 2
 featured: true
 problem: 'A beauty supply business wanted to sell online without stitching together a web store, a point-of-sale tool, and a spreadsheet for stock. They needed customers to shop easily and the owner to run the whole thing from a phone.'
-build: 'I built two connected iOS apps on a shared backend: a customer storefront for browsing and checkout, and an owner app for inventory, orders, and customer messages. Payments run through Stripe, and both apps stay in sync so stock and orders are always current.'
-resultDetail: 'The storefront and owner app are in production, giving the business a single system for selling, managing inventory, and talking to customers in one place.'
+build: 'I built two connected mobile apps (iOS and Android) on a shared backend: a customer storefront for browsing and checkout, and an owner app for inventory, orders, and customer messages. Payments run through Stripe, and both apps stay in sync so stock and orders are always current.'
+resultDetail: 'The storefront and owner app are in production, giving the business a single system for selling, managing inventory, and talking to customers in one place. Beyond the apps, I run the company''s day-to-day IT and tech support and set up and manage their company email.'
 ---
