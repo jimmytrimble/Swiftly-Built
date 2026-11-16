@@ -11,12 +11,12 @@ const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.o
 
 <Base
   title="Work — Swiftly Built"
-  description="Case studies of iOS and Android apps shipped end to end by Swiftly Built: scope, build, launch, and results."
+  description="Featured work: iOS and Android apps shipped end to end by Swiftly Built — scope, build, launch, and results."
 >
   <Section tone="light" aria-labelledby="work-h">
     <Eyebrow onLight>Work</Eyebrow>
     <h1 id="work-h" class="h-display page-h">
-      Case studies
+      Featured work
     </h1>
     <ul class="grid" role="list">
       {all.map((e, i) => (

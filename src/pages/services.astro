@@ -10,31 +10,26 @@ const tiers = [
     name: 'Sprint',
     get: 'Clickable prototype or MVP, iOS first, one core flow',
     scope: '2 to 3 weeks',
-    price: '~$3,500',
   },
   {
     name: 'Launch',
     get: 'Full production app, iOS and Android, backend, auth, store submission',
     scope: '6 to 10 weeks',
-    price: '~$8,000',
   },
   {
     name: 'Scale',
     get: 'Launch plus payments, admin dashboard, analytics, CI/CD',
     scope: '10 to 16 weeks',
-    price: '~$12,000',
   },
   {
     name: 'Retainer',
     get: 'Maintenance, OS updates, feature work',
     scope: 'Monthly',
-    price: 'By scope',
   },
   {
     name: 'Advisory',
     get: 'Technical due diligence, architecture review, fractional CTO',
     scope: 'By project',
-    price: 'By scope',
   },
 ];
 
@@ -103,28 +98,27 @@ const jsonLd = {
 ---
 
 <Base
-  title="Services and pricing — Swiftly Built"
-  description="Everything Swiftly Built offers — apps, websites, backend, payments, AI, business IT and email — with rough starting prices and a firm quote before any work begins."
+  title="Services — Swiftly Built"
+  description="What Swiftly Built offers — apps, websites, backend, payments, AI, business IT and email. Every project is scoped and quoted individually; reach out for a quote."
 >
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   <Section tone="dark" aria-labelledby="svc-h">
     <h1 id="svc-h" class="h-display page-h">
-      Clear scope. Honest pricing.
+      Services, scoped to you.
     </h1>
     <p class="intro">
-      The numbers below are rough starting points, not final quotes — every project is priced on its
-      own once I know what you need. You'll always get a firm price and a delivery date before any
-      work begins, so don't let a figure stop you from reaching out.
+      Here's how projects are shaped and what every engagement includes. Because scope and
+      complexity vary so much from one project to the next, I price each one individually — tell me
+      what you have in mind and I'll put a quote together.
     </p>
 
-    <div class="table-wrap" tabindex="0" role="region" aria-label="Pricing tiers, scrollable">
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Engagement tiers, scrollable">
       <table class="tiers">
         <thead>
           <tr>
             <th scope="col">Tier</th>
             <th scope="col">What you get</th>
             <th scope="col">Typical scope</th>
-            <th scope="col">Starting at</th>
           </tr>
         </thead>
         <tbody>
@@ -133,7 +127,6 @@ const jsonLd = {
               <th scope="row">{t.name}</th>
               <td>{t.get}</td>
               <td>{t.scope}</td>
-              <td class="price">{t.price}</td>
             </tr>
           ))}
         </tbody>
@@ -141,11 +134,11 @@ const jsonLd = {
     </div>
 
     <p class="tiers-note">
-      Rough starting points — final pricing depends on the features and scope of your project.
+      Every project is priced individually once I understand the scope.
       <a href="/contact" class="text-link">
         Reach out for a quote
       </a>{' '}
-      and we'll scope it together, with a firm number before any work begins.
+      and we'll scope it together — you'll have a firm number before any work begins.
     </p>
   </Section>
 
@@ -254,12 +247,6 @@ const jsonLd = {
   }
   .tiers td {
     color: var(--color-text-soft);
-  }
-  .price {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    color: var(--color-white);
-    white-space: nowrap;
   }
   .two {
     display: grid;

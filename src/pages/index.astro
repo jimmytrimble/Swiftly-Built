@@ -183,7 +183,7 @@ const jsonLd = {
         </h2>
       </div>
       <a href="/work" class="text-link">
-        All case studies →
+        All featured work →
       </a>
     </div>
     <ul class="cards" role="list">
@@ -221,10 +221,13 @@ const jsonLd = {
     <h2 id="how-h" class="h-display section-h">
       From the blocks to the finish line.
     </h2>
-    <div class="lane-divider" aria-hidden="true">
-      <span />
-      <span />
-      <span />
+    <div class="lane" aria-hidden="true">
+      <div class="lane-divider">
+        <span />
+        <span />
+        <span />
+      </div>
+      <img class="lane__runner" src="/brand/mark-electric.png" width="46" height="36" alt="" />
     </div>
     <ol class="steps" role="list">
       {steps.map((s, i) => (
@@ -487,11 +490,14 @@ const jsonLd = {
     display: block;
   }
 
+  .lane {
+    position: relative;
+    margin: 0 0 30px;
+  }
   .lane-divider {
     display: grid;
     grid-template-columns: 1fr;
     gap: 6px;
-    margin: 0 0 30px;
   }
   .lane-divider span {
     height: 2px;
@@ -506,6 +512,21 @@ const jsonLd = {
   }
   .lane-divider span:nth-child(3) {
     background: var(--color-podium);
+  }
+  /* The runner scrubs along the track in sync with scroll position — at the
+     start blocks as the section enters, at the finish line as it leaves, and
+     back again on scroll up. Its left/transform are set from JS below. */
+  .lane__runner {
+    display: none;
+  }
+  :global(.js) .lane__runner {
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 46px;
+    height: auto;
+    will-change: left, transform;
   }
 
   .steps {
@@ -645,5 +666,32 @@ const jsonLd = {
     phoneFront?.addEventListener('focusout', start);
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
     start();
+  }
+
+  // Scrub the runner along the track with scroll position: at the start blocks
+  // as the "How it works" section enters, at the finish line as it leaves, and
+  // back the other way on scroll up.
+  const runner = document.querySelector<HTMLImageElement>('.lane__runner');
+  const howSection = document.querySelector<HTMLElement>('#how-h')?.closest('section');
+  if (runner && howSection) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = howSection.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      let progress = (vh - rect.top) / (vh + rect.height);
+      progress = Math.min(1, Math.max(0, progress));
+      runner.style.left = `${progress * 100}%`;
+      runner.style.transform = `translateX(${progress * -100}%)`;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
   }
 </script>

@@ -20,12 +20,12 @@ const timeline = `Scoped in 48 hours, delivered in ${d.turnaroundWeeks} weeks wi
 ---
 
 <Base
-  title={`${d.title} — Case study`}
+  title={`${d.title} — Featured work`}
   description={`${d.title} for a ${d.client.toLowerCase()}: ${d.result}`}
   ogType="article"
 >
   <Section tone="dark" aria-labelledby="cs-h">
-    <Eyebrow>Case study</Eyebrow>
+    <Eyebrow>Featured work</Eyebrow>
     <h1 id="cs-h" class="h-display cs-h">
       {d.title}
     </h1>
@@ -90,7 +90,7 @@ const timeline = `Scoped in 48 hours, delivered in ${d.turnaroundWeeks} weeks wi
     </ul>
   </div>
 
-  <nav class="pager" aria-label="Other case studies">
+  <nav class="pager" aria-label="Other featured work">
     <div class="container-site pager__inner">
       {prev ? (
         <a href={`/work/${prev.id}`} class="pager__link">
@@ -100,7 +100,7 @@ const timeline = `Scoped in 48 hours, delivered in ${d.turnaroundWeeks} weeks wi
       ) : (
         <a href="/work" class="pager__link">
           <span>← All work</span>
-          <strong>Case studies</strong>
+          <strong>Featured work</strong>
         </a>
       )}
       {next ? (
@@ -111,7 +111,7 @@ const timeline = `Scoped in 48 hours, delivered in ${d.turnaroundWeeks} weeks wi
       ) : (
         <a href="/work" class="pager__link pager__link--next">
           <span>All work →</span>
-          <strong>Case studies</strong>
+          <strong>Featured work</strong>
         </a>
       )}
     </div>
